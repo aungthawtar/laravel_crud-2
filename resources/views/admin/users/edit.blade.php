@@ -13,9 +13,18 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input id="email" type="text" name="name" class="form-control" value="{{$user->email}}">
+                        <input id="email" type="text" name="email" class="form-control" value="{{$user->email}}">
                     </div>
                     <div>
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="">Select Status</option>
+                            <option @if($user->status == "admin") selected @endif>admin</option>
+                            <option @if($user->status == "user") selected @endif>user</option>
+                        </select>
+                    </div>
+
                     @foreach($roles as $role)
                         <input type="checkbox" name="role_ids[]"  value="{{$role->id}}" id="role{{$role->id}}"
                         @foreach($user->roles as $userRole)

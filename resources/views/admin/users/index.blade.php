@@ -3,6 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible show fade">{{session('success')}}
+                <button class="close" data-dismiss="alert">&times;</button>
+            </div>
+        @endif
         <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Users Table</h3>
@@ -26,6 +31,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Roles</th>
+                                <th>Status</th>
                                 <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,10 +46,12 @@
                                         <span class="badge badge-primary">{{$role->name}}</span>
                                     @endforeach
                                 </td>
+                                <td>{{$user->status}}</td>
                                 <td>
                                     <a href="{{url("admin/users/$user->id/edit")}}" class="btn btn-primary btn-sm">Manage Role</a>
-                                    <a href="{{url("admin/users/$user->id")}}" class="btn btn-info btn-sm">Edit</a>
-                                    <a href="{{url("admin/users/$user->id")}}" class="btn btn-danger btn-sm">Delete</a>
+                                    <!-- <a href="{{url("admin/users/$user->id/edit")}}" class="btn btn-secondary btn-sm">Manage Status</a> -->
+                                    <a href="{{url("admin/users/$user->id/edit")}}" class="btn btn-info btn-sm">Edit</a>
+                                    <a href="{{url("admin/users/$user->id/delete")}}" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                                 </tr>
                             </tbody>

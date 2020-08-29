@@ -74,9 +74,16 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $userId = $request->role_ids;
-        $user->roles()->sync($userId);
-        return redirect('admin/users');
+        // $userId = $request->role_ids;
+        // $user->roles()->sync($userId);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'status' => $request->status,
+        ]);
+        
+        return redirect('admin/users')->with('success','A User Succesfully Updated!');
     }
 
     /**
@@ -87,6 +94,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('admin/users')->with('success','A User Successfully Deleted!');
     }
 }

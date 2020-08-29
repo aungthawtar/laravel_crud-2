@@ -33,29 +33,31 @@ class PostController extends Controller
         // $image->move($imagePath,$imageName);
 
 
-        // if(! $request->hasFile('image')){
-        //     Post::create([
-        //         'title' => $request->title,
-        //         'content' => $request->content,
-        //     ]);
-        // }else{
-        //     $imageName = time(). $request->file('image')->getClientOriginalName();
-        //     $path = '/images';
-        //     $imagePath = public_path($path);
-        //     $request->file('image')->move($imagePath,$imageName);
-        //     Post::create([
-        //         'title' => $request->title,
-        //         'content' => $request->content,
-        //         'image' => $path . '/' . $imageName,
-        //     ]);
-        // }
-
-        if($request->hasFile('image')){
-            foreach($request->file('image') as $image){
-                $imageName = time().'/'.$image->getClientOriginalName();
-                $image->storeAs('upload',$imageName);
-            }
+        if(! $request->hasFile('image')){
+            Post::create([
+                'title' => $request->title,
+                'content' => $request->content,
+            ]);
+        }else{
+            $imageName = time(). $request->file('image')->getClientOriginalName();
+            $path = '/images';
+            $imagePath = public_path($path);
+            $request->file('image')->move($imagePath,$imageName);
+            Post::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'image' => $path . '/' . $imageName,
+            ]);
         }
+
+        // image to upload to storage
+        
+        // if($request->hasFile('image')){
+        //     foreach($request->file('image') as $image){
+        //         $imageName = time().'/'.$image->getClientOriginalName();
+        //         $image->storeAs('upload',$imageName);
+        //     }
+        // }
 
 
         return redirect('admin/post');

@@ -32,6 +32,7 @@ Route::group(['prefix'=>'admin/users', 'middleware' => 'IsAdmin'],function(){
     Route::get('/','UserController@index');
     Route::get('/{id}/edit','UserController@edit');
     Route::post('/{id}/edit','UserController@update');
+    Route::get('/{id}/delete','UserController@destroy');
 });
 
     // NormalUser Route
